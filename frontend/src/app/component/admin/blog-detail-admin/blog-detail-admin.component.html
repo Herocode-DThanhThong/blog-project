@@ -1,0 +1,25 @@
+<div>
+  <div>
+    <h2 class="text-2xl">Author</h2>
+    <div>
+      <p><strong>Firstname: </strong> {{ blog.user.firstName }}</p>
+      <p><strong>Lastname: </strong> {{ blog.user.lastName }}</p>
+      <p><strong>Email: </strong> {{ blog.user.email }}</p>
+      <p><strong>Address: </strong> {{ blog.user.address }}</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="text-2xl">Blog</h2>
+    <div>
+      <p><strong>Created Date: </strong> {{ blog.createdDate }}</p>
+      <p><strong>Updated Date: </strong> {{ blog.updatedDate }}</p>
+      <p><strong>Content: </strong></p>
+    </div>
+    <p class="leading-8 my-0">
+      {{ blog.content }}
+    </p>
+  </div>
+
+  <app-notification></app-notification>
+</div>

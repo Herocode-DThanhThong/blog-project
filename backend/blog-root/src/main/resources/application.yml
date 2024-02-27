@@ -1,0 +1,59 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/blog-root-app
+    username: postgres
+    password: 123456
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    host: localhost
+    port: 26
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 6379
+  quartz:
+    job-store-type: jdbc
+    properties:
+      org.quartz.threadPool:
+        threadCount: 5
+      org.quartz.jobStore:
+        driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+application:
+  security:
+    jwt:
+      secret-key: c29tZW9uZXNraW5taWxscm9vdGNhbGxydWJiZWRhdWRpZW5jZWZhc3RlcndyaXRldHI=
+      expiration:
+        accessToken: 86400000 # one day
+        refreshToken: 604800000 # one week
+        verificationToken: 1800000 # thirty minutes
+email:
+  from: thong-dev@gmail.com
+app:
+  frontend-url: http://localhost:4200
+caching:
+  entity:
+    blog: blog_caching
+    roleManagerRequest: roleManagerRequest_caching
+job:
+  blog:
+    redis:
+      group-name-job-detail: blog-redis-job-detail
+      description-job-detail: Clear cache blog redis job detail
+      group-name-trigger: blog-trigger-redis
+      description-trigger: Clear cache blog redis trigger
+  role-manager-request:
+    redis:
+      group-name-job-detail: role-manager-request-redis-job-detail
+      description-job-detail: Clear cache role manager request redis job detail
+      group-name-trigger: role-manager-request-trigger-redis
+      description-trigger: Clear cache role manager request redis trigger

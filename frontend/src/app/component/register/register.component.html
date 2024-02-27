@@ -1,0 +1,178 @@
+<div class="my-2">
+  <h3 class="text-center text-xl font-semibold underline">Register</h3>
+  <div class="max-w-lg mx-auto mt-4">
+    <form nz-form #registerForm="ngForm">
+      <div class="grid grid-cols-2 gap-2">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your first name!">
+            <nz-input-group nzPrefixIcon="user">
+              <span
+                *ngIf="
+                  firstName.length > 0 &&
+                  registerForm.controls['firstName'].touched
+                "
+                class="w-1 h-5 py-2 mr-2 bg-green-400 absolute right-[-2px]"
+              ></span>
+              <input
+                type="text"
+                name="firstName"
+                [(ngModel)]="firstName"
+                required
+                nz-input
+                placeholder="First Name"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your last name!">
+            <nz-input-group nzPrefixIcon="user">
+              <span
+                *ngIf="
+                  lastName.length > 0 &&
+                  registerForm.controls['lastName'].touched
+                "
+                class="w-1 h-5 py-2 mr-2 bg-green-400 absolute right-[-2px]"
+              ></span>
+              <input
+                type="text"
+                name="lastName"
+                [(ngModel)]="lastName"
+                required
+                nz-input
+                placeholder="Last Name"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your username!">
+          <nz-input-group nzPrefixIcon="user">
+            <span
+              *ngIf="
+                username.length > 0 && registerForm.controls['username'].touched
+              "
+              class="w-1 h-5 py-2 mr-2 bg-green-400 absolute right-[-2px]"
+            ></span>
+            <input
+              type="text"
+              name="username"
+              [(ngModel)]="username"
+              required
+              nz-input
+              placeholder="Username"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your email!">
+          <nz-input-group nzPrefixIcon="mail">
+            <span
+              *ngIf="email.length > 0 && registerForm.controls['email'].touched"
+              class="w-1 h-5 py-2 mr-2 bg-green-400 absolute right-[-2px]"
+            ></span>
+            <input
+              name="email"
+              type="email"
+              [(ngModel)]="email"
+              required
+              nz-input
+              placeholder="Email"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password!">
+          <nz-input-group nzPrefixIcon="lock">
+            <span
+              *ngIf="
+                password.length > 0 && registerForm.controls['password'].touched
+              "
+              class="w-1 h-5 py-2 mr-2 bg-green-400 absolute right-[-2px]"
+            ></span>
+            <input
+              name="password"
+              type="password"
+              autocomplete="on"
+              (input)="onPasswordChange()"
+              [(ngModel)]="password"
+              required
+              nz-input
+              placeholder="Password"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="passwordErrorTpl">
+          <nz-input-group nzPrefixIcon="lock">
+            <span
+              *ngIf="
+                confirmPassword.length > 0 &&
+                !registerForm.controls['confirmPassword'].hasError(
+                  'passwordConfirmMatch'
+                ) &&
+                registerForm.controls['confirmPassword'].touched
+              "
+              class="w-1 h-5 py-2 mr-2 bg-green-400 absolute right-[-2px]"
+            ></span>
+            <input
+              name="confirmPassword"
+              type="password"
+              autocomplete="on"
+              (input)="onPasswordChange()"
+              [(ngModel)]="confirmPassword"
+              required
+              nz-input
+              placeholder="Confirm Password"
+            />
+            <ng-template #passwordErrorTpl let-control>
+              @if (control.value.length === 0){ Password is required! }
+              @if(registerForm.controls['confirmPassword'].hasError('passwordConfirmMatch')
+              && control.value.length > 0) { Password is inconsistent! }
+            </ng-template>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control
+          [nzSpan]="24"
+          nzHasFeedback
+          nzErrorTip="Please write something here!"
+        >
+          <span
+            *ngIf="
+              address.length > 0 && registerForm.controls['address'].touched
+            "
+            class="w-1 h-5 py-2 mr-2 bg-green-400 absolute right-[-2px]"
+          ></span>
+          <textarea
+            name="address"
+            class="w-full"
+            [(ngModel)]="address"
+            nz-input
+            placeholder="Your Address"
+            [nzAutosize]="{ minRows: 4 }"
+          ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+      <button
+        [disabled]="!registerForm.valid"
+        nz-button
+        (click)="onRegister()"
+        class="register-form-button register-form-margin"
+        [nzType]="'primary'"
+      >
+        Sign Up
+      </button>
+      <div class="text-center">
+        Or
+        <a class="capitalize" [routerLink]="['/login']">login now!</a>
+      </div>
+    </form>
+  </div>
+  <app-notification></app-notification>
+</div>

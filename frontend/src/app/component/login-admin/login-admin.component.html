@@ -1,0 +1,66 @@
+<div class="my-2">
+  <div class="flex gap-2 items-center">
+    <div class="w-1/2 py-8">
+      <img class="rounded-md shadow-sm" src="/assets/admin.jpg" alt="" />
+    </div>
+    <div class="flex-1">
+      <h3 class="text-center text-xl font-semibold underline">Login</h3>
+      <form nz-form #loginAdminForm="ngForm">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your username!">
+            <nz-input-group nzPrefixIcon="user">
+              <span
+                *ngIf="
+                  username.length > 0 &&
+                  loginAdminForm.controls['username'].touched
+                "
+                class="w-1 h-5 py-2 mr-2 bg-green-400 absolute right-[-2px]"
+              ></span>
+              <input
+                type="text"
+                nz-input
+                name="username"
+                [(ngModel)]="username"
+                required
+                placeholder="Username"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your Password!">
+            <nz-input-group nzPrefixIcon="lock">
+              <span
+                *ngIf="
+                  password.length > 0 &&
+                  loginAdminForm.controls['password'].touched
+                "
+                class="w-1 h-5 py-2 mr-2 bg-green-400 absolute right-[-2px]"
+              ></span>
+              <input
+                name="password"
+                type="password"
+                autocomplete="on"
+                nz-input
+                [(ngModel)]="password"
+                required
+                placeholder="Password"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+
+        <button
+          [disabled]="!loginAdminForm.valid"
+          nz-button
+          (click)="onLogin()"
+          class="login-form-button login-form-margin"
+          [nzType]="'primary'"
+        >
+          Sign In
+        </button>
+      </form>
+    </div>
+  </div>
+  <app-notification></app-notification>
+</div>

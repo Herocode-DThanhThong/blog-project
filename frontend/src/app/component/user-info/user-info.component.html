@@ -1,0 +1,98 @@
+<div class="my-2">
+  <h3 class="text-center text-xl font-semibold underline">Your information</h3>
+  <div class="max-w-screen-xl mx-auto mt-4">
+    <form nz-form #userForm="ngForm">
+      <div class="grid grid-cols-3 gap-2">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="">
+            <nz-input-group nzPrefixIcon="user">
+              <input
+                readonly
+                type="text"
+                name="firstName"
+                [(ngModel)]="user.firstName"
+                required
+                nz-input
+                placeholder="First Name"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="">
+            <nz-input-group nzPrefixIcon="user">
+              <input
+                readonly
+                type="text"
+                name="lastName"
+                [(ngModel)]="user.lastName"
+                required
+                nz-input
+                placeholder="Last Name"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="">
+            <nz-input-group nzPrefixIcon="user">
+              <input
+                readonly
+                disabled
+                type="text"
+                name="role"
+                [(ngModel)]="user.role"
+                required
+                nz-input
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="">
+          <nz-input-group nzPrefixIcon="user">
+            <input
+              readonly
+              type="text"
+              name="username"
+              [(ngModel)]="user.username"
+              required
+              nz-input
+              placeholder="Username"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="">
+          <nz-input-group nzPrefixIcon="mail">
+            <input
+              readonly
+              name="email"
+              type="email"
+              [(ngModel)]="user.email"
+              required
+              nz-input
+              placeholder="Email"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="">
+          <textarea
+            readonly
+            name="address"
+            class="w-full"
+            [(ngModel)]="user.address"
+            nz-input
+            placeholder="Your Address"
+            [nzAutosize]="{ minRows: 4 }"
+          ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+  <app-notification></app-notification>
+</div>

@@ -1,0 +1,17 @@
+<div class="w-full min-h-screen relative bg-gray-50">
+  <div
+    [ngClass]="{
+      'container w-full p-4 h-full mx-auto max-w-6xl': !isAdminRoute
+    }"
+  >
+    <!-- Header -->
+    <app-header *ngIf="!isAdminRoute"></app-header>
+    <router-outlet></router-outlet>
+    <!-- Footer -->
+    <app-footer *ngIf="!isAdminRoute"></app-footer>
+    <ngx-loading
+      [show]="loading"
+      [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"
+    ></ngx-loading>
+  </div>
+</div>

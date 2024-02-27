@@ -1,0 +1,59 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    host: ${SPRING_MAIL_HOST}
+    port: ${SPRING_MAIL_PORT}
+  cache:
+    type: redis
+  redis:
+    host: ${SPRING_REDIS_HOST}
+    port: ${SPRING_REDIS_PORT}
+  quartz:
+    job-store-type: jdbc
+    properties:
+      org.quartz.threadPool:
+        threadCount: 5
+      org.quartz.jobStore:
+        driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+application:
+  security:
+    jwt:
+      secret-key: ${APPLICATION_SECURITY_JWT_SECRET}
+      expiration:
+        accessToken: 86400000 # one day
+        refreshToken: 604800000 # one week
+        verificationToken: 1800000 # thirty minutes
+email:
+  from: ${EMAIL_FROM}
+app:
+  frontend-url: ${APP_FRONTEND_URL}
+caching:
+  entity:
+    blog: blog_caching
+    roleManagerRequest: roleManagerRequest_caching
+job:
+  blog:
+    redis:
+      group-name-job-detail: blog-redis-job-detail
+      description-job-detail: Clear cache blog redis job detail
+      group-name-trigger: blog-trigger-redis
+      description-trigger: Clear cache blog redis trigger
+  role-manager-request:
+    redis:
+      group-name-job-detail: role-manager-request-redis-job-detail
+      description-job-detail: Clear cache role manager request redis job detail
+      group-name-trigger: role-manager-request-trigger-redis
+      description-trigger: Clear cache role manager request redis trigger

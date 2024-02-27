@@ -1,0 +1,92 @@
+<div>
+  <nz-layout class="layout">
+    <nz-sider>
+      <div class="flex gap-2 p-4">
+        <img
+          class="w-[50px] h-[50px] rounded-md"
+          src="/assets/logo.jpg"
+          alt=""
+        />
+        <h4
+          class="px-2 text-blue-600 text-blue rounded-md font-semibold py-2 text-[16px] p-1 border-b-2"
+        >
+          <span class="text-gray-800 font-semibold">B</span
+          ><span class="text-blue-600">L</span>
+          <span class="text-green-600">O</span>
+          <span class="text-orange-600">G</span>
+        </h4>
+      </div>
+      <ul nz-menu nzTheme="dark" nzMode="inline">
+        <a
+          (click)="onMenuChange('/admin/user')"
+          [routerLink]="['/admin/user']"
+          class="text-sm text-gray-600 font-semibold block mb-4"
+        >
+          <li nz-menu-item [nzSelected]="currentPath.includes('/admin/user')">
+            <p class="flex items-center my-0">
+              <span nz-icon nzType="user"></span>
+              <span>Manage user</span>
+            </p>
+          </li>
+        </a>
+        <a
+          (click)="onMenuChange('/admin/blog')"
+          [routerLink]="['/admin/blog']"
+          class="text-sm text-gray-600 font-semibold block mb-4"
+        >
+          <li nz-menu-item [nzSelected]="currentPath.includes('/admin/blog')">
+            <p class="flex items-center my-0">
+              <span nz-icon nzType="book"></span>
+              <span>Manage blog</span>
+            </p>
+          </li>
+        </a>
+        <a
+          (click)="onMenuChange('/admin/role-request')"
+          [routerLink]="['/admin/role-request']"
+          class="text-sm text-gray-600 font-semibold block mb-4"
+        >
+          <li
+            nz-menu-item
+            [nzSelected]="currentPath.includes('/admin/role-request')"
+          >
+            <p class="flex items-center my-0">
+              <span nz-icon nzType="pull-request"></span>
+              <span>Manage role request</span>
+            </p>
+          </li>
+        </a>
+      </ul>
+    </nz-sider>
+    <nz-layout class="right-layout">
+      <nz-header>
+        <div
+          class="mx-4 my-2 text-xl font-semibold flex items-center justify-between"
+        >
+          <p class="m-0">
+            <span *ngIf="currentPath.includes('/admin/user')">Manage user</span>
+            <span *ngIf="currentPath.includes('/admin/blog')">Manage blog</span>
+            <span *ngIf="currentPath.includes('/admin/role-request')"
+              >Manage role request</span
+            >
+          </p>
+          <button
+            (click)="logOut()"
+            nz-button
+            nzType="primary"
+            class="mt-2"
+            nzDanger
+          >
+            Log out
+          </button>
+        </div>
+      </nz-header>
+      <nz-content>
+        <router-outlet></router-outlet>
+      </nz-content>
+      <nz-footer>
+        <p class="text-center my-0">Made By Duong Thanh Thong &#64;2024</p>
+      </nz-footer>
+    </nz-layout>
+  </nz-layout>
+</div>

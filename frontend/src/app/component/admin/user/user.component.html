@@ -1,0 +1,54 @@
+<div>
+  <nz-table #userList [nzData]="users" [nzScroll]="{ x: '1000px', y: '380px' }">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Avatar</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of userList.data">
+        <td>{{ data.id }}</td>
+        <td>{{ data.username }}</td>
+        <td>{{ data.firstName }}</td>
+        <td>{{ data.lastName }}</td>
+        <td>{{ data.avatar }}</td>
+        <td>{{ data.role }}</td>
+        <td class="flex gap-2">
+          <button
+            disabled
+            nz-button
+            class="btn-icon"
+            style="padding: 4px 8px"
+            [nzType]="'primary'"
+          >
+            <span nz-icon nzType="edit" class="block" nzTheme="outline"></span>
+            <span class="text-xs">Edit</span>
+          </button>
+          <button
+            disabled
+            nz-button
+            class="btn-icon"
+            style="padding: 4px 8px"
+            [nzType]="'primary'"
+            nzDanger
+          >
+            <span
+              nz-icon
+              nzType="delete"
+              class="block"
+              nzTheme="outline"
+            ></span>
+            <span class="text-xs">Delete</span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <app-notification></app-notification>
+</div>

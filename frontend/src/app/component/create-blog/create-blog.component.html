@@ -1,0 +1,61 @@
+<div class="my-2">
+  <h1 class="text-center text-xl uppercase underline">Create new blog</h1>
+  <div class="mb-2" *ngIf="user.role === 'USER'">
+    <nz-alert
+      nzType="info"
+      nzMessage="Please send request change role to manager for creating blog"
+      nzShowIcon
+    ></nz-alert>
+  </div>
+  <form nz-form #createBlogForm="ngForm" class="create-blog-form">
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your content">
+        <input
+          type="text"
+          nz-input
+          name="title"
+          [disabled]="user.role === 'USER'"
+          [(ngModel)]="title"
+          required
+          placeholder="Title"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your content">
+        <textarea
+          required
+          name="content"
+          [(ngModel)]="content"
+          [disabled]="user.role === 'USER'"
+          nz-input
+          placeholder="Please input content of your blog"
+          [nzAutosize]="{ minRows: 4 }"
+        ></textarea>
+      </nz-form-control>
+    </nz-form-item>
+    <div class="flex gap-2">
+      <button
+        (click)="createBlog()"
+        [disabled]="user.role === 'USER'"
+        nz-button
+        class="btn-icon"
+        [nzType]="'primary'"
+      >
+        <span nz-icon nzType="save" class="block" nzTheme="outline"></span>
+        <span class="text-xs">Save</span>
+      </button>
+      <button
+        [disabled]="!createBlogForm.valid || user.role === 'USER'"
+        nz-button
+        class="btn-icon"
+        [nzType]="'primary'"
+        nzDanger
+      >
+        <span nz-icon nzType="clear" class="block" nzTheme="outline"></span>
+        <span class="text-xs">Clear</span>
+      </button>
+    </div>
+  </form>
+  <app-notification></app-notification>
+</div>

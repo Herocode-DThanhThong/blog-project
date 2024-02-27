@@ -1,0 +1,35 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="The first Modal"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+>
+  <ng-container *nzModalContent>
+    <form nz-form #createBlogForm="ngForm" class="create-blog-form">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your content">
+          <input
+            type="text"
+            nz-input
+            name="title"
+            [(ngModel)]="data.title"
+            required
+            placeholder="Title"
+          />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your content">
+          <textarea
+            required
+            name="content"
+            [(ngModel)]="data.content"
+            nz-input
+            placeholder="Content"
+            [nzAutosize]="{ minRows: 4 }"
+          ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>

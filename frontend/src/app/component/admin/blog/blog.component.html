@@ -1,0 +1,58 @@
+<div>
+  <nz-table #blogList [nzData]="blogs" [nzScroll]="{ x: '1000px', y: '480px' }">
+    <thead>
+      <tr>
+        <th nzWidth="60px">ID</th>
+        <th nzWidth="120px">Author</th>
+        <th nzWidth="320px">Content</th>
+        <th nzWidth="180px">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of blogList.data">
+        <td>{{ data.id }}</td>
+        <td>
+          {{ data.user.firstName + " " + data.user.lastName }}
+        </td>
+        <td class="truncate">
+          {{ data.content }}
+        </td>
+        <td class="flex gap-2">
+          <a [routerLink]="['/admin/blog', data.id.toString()]">
+            <button
+              nz-button
+              class="btn-icon"
+              style="padding: 4px 8px"
+              [nzType]="'primary'"
+            >
+              <span
+                nz-icon
+                nzType="edit"
+                class="block"
+                nzTheme="outline"
+              ></span>
+              <span class="text-xs">View detail</span>
+            </button>
+          </a>
+          <button
+            disabled
+            nz-button
+            class="btn-icon"
+            style="padding: 4px 8px"
+            [nzType]="'primary'"
+            nzDanger
+          >
+            <span
+              nz-icon
+              nzType="delete"
+              class="block"
+              nzTheme="outline"
+            ></span>
+            <span class="text-xs">Delete</span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <app-notification></app-notification>
+</div>

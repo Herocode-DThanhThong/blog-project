@@ -1,0 +1,43 @@
+<!-- Tasks -->
+<div class="my-2">
+  <div *ngIf="verifySuccess">
+    <nz-alert nzType="success" [nzMessage]="title" nzShowIcon></nz-alert>
+    <p class="leading-8">
+      <span class="font-semibold text-xl mt-2 text-center block my-0 py-0">
+        Tentative congratulations! Your account verification process has been
+        successfully completed. 🎉
+      </span>
+      We're thrilled to welcome you to our community! Your verified status opens
+      up a world of opportunities and benefits, ensuring a smoother and more
+      secure experience within our platform. From now on, you can explore all
+      the features and functionalities with confidence, knowing that your
+      account has been authenticated. Thank you for your trust in us. Should you
+      have any questions or need assistance, our support team is here to help
+      you every step of the way. Once again, congratulations on achieving
+      verified status! We look forward to seeing you thrive within our
+      community. Best regards, Duong Thanh Thong Team
+    </p>
+  </div>
+  <div *ngIf="!verifySuccess">
+    <nz-alert nzType="error" [nzMessage]="title" nzShowIcon></nz-alert>
+    <p class="leading-8">
+      <span class="font-semibold text-xl mt-2 text-center block my-0 py-0">
+        We regret to inform you that your account verification process has not
+        been successful.
+      </span>
+      <span class="text-sm text-red-600"> Reason: {{ message }} </span>
+      <br />
+      We understand that this news may be disappointing, and we want to assure
+      you that we are here to assist you in resolving any issues that may have
+      arisen during the verification process. Please review the information you
+      provided during the verification process and ensure that all details are
+      accurate and up to date. If you believe there may have been an error or if
+      you require further assistance, please don't hesitate to contact our
+      support team for assistance. We apologize for any inconvenience this may
+      have caused and appreciate your patience and understanding as we work to
+      resolve this matter. Thank you for choosing our platform. We hope to
+      assist you in successfully completing the verification process soon. Best
+      regards, Duong Thanh Thong Team
+    </p>
+  </div>
+</div>

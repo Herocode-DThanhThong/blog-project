@@ -1,0 +1,47 @@
+<!-- Tasks -->
+<div class="my-2">
+  <div class="flex gap-2 items-center">
+    <div class="w-1/2 py-8">
+      <img class="rounded-md shadow-sm" src="/assets/verify.jpg" alt="" />
+    </div>
+    <div class="flex-1">
+      <h1 class="text-center mb-6 text-xl uppercase underline">
+        Verify your account
+      </h1>
+      <form nz-form #verifyEmailForm="ngForm">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your username!">
+            <nz-input-group nzPrefixIcon="user">
+              <span
+                *ngIf="
+                  username.length > 0 &&
+                  verifyEmailForm.controls['username'].touched
+                "
+                class="w-1 h-5 py-2 mr-2 bg-green-400 absolute right-[-2px]"
+              ></span>
+              <input
+                type="text"
+                nz-input
+                name="username"
+                [(ngModel)]="username"
+                required
+                placeholder="Enter your username"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <button
+          [disabled]="!verifyEmailForm.valid"
+          (click)="onSubmit()"
+          nz-button
+          class="btn-icon"
+          [nzType]="'primary'"
+        >
+          <span nz-icon nzType="send" nzTheme="outline"></span>
+          <span class="text-xs">Send</span>
+        </button>
+      </form>
+    </div>
+  </div>
+  <app-notification></app-notification>
+</div>

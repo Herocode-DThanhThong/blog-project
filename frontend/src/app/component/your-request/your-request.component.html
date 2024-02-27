@@ -1,0 +1,55 @@
+<div class="my-2">
+  <h1 class="text-center text-xl uppercase underline">
+    Send request change role
+  </h1>
+  <nz-alert
+    *ngIf="user.role !== 'USER'"
+    class="mb-2"
+    nzType="info"
+    nzMessage="You already has role manager!"
+    nzShowIcon
+  ></nz-alert>
+  <form nz-form #roleRequestForm="ngForm">
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your title">
+        <nz-input-group nzPrefixIcon="file-text">
+          <input
+            [disabled]="user.role !== 'USER'"
+            type="text"
+            name="title"
+            [(ngModel)]="title"
+            required
+            nz-input
+            placeholder="Title"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your reason">
+        <textarea
+          [disabled]="user.role !== 'USER'"
+          name="description"
+          [(ngModel)]="description"
+          required
+          nz-input
+          placeholder="Why do you want to change role?"
+          [nzAutosize]="{ minRows: 4 }"
+        ></textarea>
+      </nz-form-control>
+    </nz-form-item>
+    <div class="flex gap-2">
+      <button
+        [disabled]="!roleRequestForm.valid || user.role !== 'USER'"
+        (click)="onSendRequestChangeRoleRequest()"
+        nz-button
+        class="btn-icon"
+        [nzType]="'primary'"
+      >
+        <span nz-icon nzType="send" class="block" nzTheme="outline"></span>
+        <span class="text-xs">Send</span>
+      </button>
+    </div>
+  </form>
+  <app-notification></app-notification>
+</div>

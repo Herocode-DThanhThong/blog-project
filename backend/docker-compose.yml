@@ -1,0 +1,87 @@
+version: "3"
+
+services:
+  postgres-db:
+    container_name: postgres_blog_app
+    image: "postgres:latest"
+    environment:
+      POSTGRES_DB: blog-root-app
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - blog-root-project-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U postgres -d blog-root-app'"]
+      interval: 3s
+      retries: 5
+      start_period: 30s
+    ports:
+      - 5432:5432
+    networks:
+      - blog-app
+    configs:
+      - source: init.sql
+        target: /docker-entrypoint-initdb.d/init.sql
+  redis-db:
+    container_name: redis_blog_app
+    image: "redis:7.2-alpine"
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-cache:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+    networks:
+      - blog-app
+  smtp4dev-email:
+    container_name: smtp4dev_email_blog_app
+    image: "rnwood/smtp4dev:v3"
+    restart: always
+    ports:
+      - 3000:80
+      - 26:25
+    volumes:
+      - smtp4dev-data:/smtp4dev
+    networks:
+      - blog-app
+  springboot-blog-app:
+    container_name: springboot_blog_app
+    image: "blog-root:latest"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/blog-root-app?allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 123456
+      SPRING_MAIL_HOST: smtp4dev_email_blog_app
+      SPRING_MAIL_PORT: 25
+      SPRING_REDIS_HOST: redis_blog_app
+      SPRING_REDIS_PORT: 6379
+      APPLICATION_SECURITY_JWT_SECRET-KEY: c29tZW9uZXNraW5taWxscm9vdGNhbGxydWJiZWRhdWRpZW5jZWZhc3RlcndyaXRldHI=
+      EMAIL_FROM: thong-dev@gmail.com
+      APP_FRONTEND_URL: http://localhost:4200
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+      redis-db:
+        condition: service_healthy
+      smtp4dev-email:
+        condition: service_started
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+    networks:
+      - blog-app
+    restart: on-failure
+volumes:
+  blog-root-project-data:
+  redis-cache:
+  smtp4dev-data:
+networks:
+  blog-app:
+    name: blog-app-network
+configs:
+  init.sql:
+    file: ./init.sql

@@ -1,0 +1,79 @@
+<div>
+  <nz-table
+    #roleRequestList
+    [nzData]="roleRequests"
+    [nzScroll]="{ x: '1000px', y: '480px' }"
+  >
+    <thead>
+      <tr>
+        <th nzWidth="60px">ID</th>
+        <th nzWidth="120px">Title</th>
+        <th nzWidth="320px">Description</th>
+        <th nzWidth="180px">Email user</th>
+        <th nzWidth="180px">Status</th>
+        <th nzWidth="180px">Created Date</th>
+        <th nzWidth="180px">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of roleRequestList.data">
+        <td>{{ data.id }}</td>
+        <td class="truncate">
+          {{ data.title }}
+        </td>
+        <td class="truncate">
+          {{ data.description }}
+        </td>
+        <td>
+          {{ data.user.email }}
+        </td>
+        <td>
+          <div [ngSwitch]="data.status">
+            <nz-tag *ngSwitchCase="'PENDING'" [nzColor]="'magenta'">
+              {{ data.status }}
+            </nz-tag>
+            <nz-tag *ngSwitchCase="'APPROVED'" [nzColor]="'green'">
+              {{ data.status }} </nz-tag
+            ><nz-tag *ngSwitchCase="'REJECTED'" [nzColor]="'red'">
+              {{ data.status }}
+            </nz-tag>
+          </div>
+        </td>
+        <td>
+          {{ data.createdDate }}
+        </td>
+        <td class="flex gap-2">
+          <button
+            [disabled]="data.status !== 'PENDING'"
+            (click)="approveRoleRequests(data.id)"
+            nz-button
+            class="btn-icon"
+            style="padding: 4px 8px"
+            [nzType]="'primary'"
+          >
+            <span nz-icon nzType="edit" class="block" nzTheme="outline"></span>
+            <span class="text-xs">Approve</span>
+          </button>
+          <button
+            [disabled]="data.status !== 'PENDING'"
+            (click)="rejectRoleRequests(data.id)"
+            nz-button
+            class="btn-icon"
+            style="padding: 4px 8px"
+            [nzType]="'primary'"
+            nzDanger
+          >
+            <span
+              nz-icon
+              nzType="delete"
+              class="block"
+              nzTheme="outline"
+            ></span>
+            <span class="text-xs">Reject</span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <app-notification></app-notification>
+</div>
