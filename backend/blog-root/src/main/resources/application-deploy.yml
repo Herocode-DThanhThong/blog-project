@@ -57,3 +57,12 @@ job:
       description-job-detail: Clear cache role manager request redis job detail
       group-name-trigger: role-manager-request-trigger-redis
       description-trigger: Clear cache role manager request redis trigger
+account:
+  admin:
+    username: ${ACCOUNT_ADMIN_USERNAME}
+    password: ${ACCOUNT_ADMIN_PASSWORD}
+    email: ${ACCOUNT_ADMIN_EMAIL}
+    firstName: ${ACCOUNT_ADMIN_FIRSTNAME}
+    lastName: ${ACCOUNT_ADMIN_LASTNAME}
+    address: ${ACCOUNT_ADMIN_ADDRESS}
+    avatar: ${ACCOUNT_ADMIN_AVATAR}

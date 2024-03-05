@@ -57,3 +57,12 @@ job:
       description-job-detail: Clear cache role manager request redis job detail
       group-name-trigger: role-manager-request-trigger-redis
       description-trigger: Clear cache role manager request redis trigger
+account:
+  admin:
+    username: duongthong
+    password: 1
+    email: dtt@gmail.com
+    firstName: Duong
+    lastName: Thong
+    address: TP.HCM
+    avatar: ""

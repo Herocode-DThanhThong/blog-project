@@ -61,6 +61,13 @@ services:
       APPLICATION_SECURITY_JWT_SECRET-KEY: c29tZW9uZXNraW5taWxscm9vdGNhbGxydWJiZWRhdWRpZW5jZWZhc3RlcndyaXRldHI=
       EMAIL_FROM: thong-dev@gmail.com
       APP_FRONTEND_URL: http://localhost:4200
+      ACCOUNT_ADMIN_USERNAME: duongthong
+      ACCOUNT_ADMIN_PASSWORD: 1
+      ACCOUNT_ADMIN_EMAIL: dtt@gmail.com
+      ACCOUNT_ADMIN_FIRSTNAME: Duong
+      ACCOUNT_ADMIN_LASTNAME: Thong
+      ACCOUNT_ADMIN_ADDRESS: TP.HCM
+      ACCOUNT_ADMIN_AVATAR: ""
     depends_on:
       postgres-db:
         condition: service_healthy
