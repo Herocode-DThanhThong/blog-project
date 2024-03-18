@@ -57,6 +57,7 @@ public class BlogController {
 
     @PostMapping
     @PreAuthorize("hasRole('MANAGER')")
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     public ResponseEntity<Blog> createBlog(@Valid @RequestBody BlogDTO blogDTO, Principal connectedUsername) throws BaseException {
         return ResponseEntity.ok(blogService.createBlog(blogDTO, connectedUsername));
     }
